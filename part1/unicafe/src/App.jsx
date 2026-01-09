@@ -14,13 +14,24 @@ const Result = ({text, count}) => {
 const App = () => {
   const text1 = "give feedback"
   const text2 = "statistics"
+
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-  const handleGoodClicks = () => setGood(good + 1)
-  const handleNeutralClicks = () => setNeutral(neutral + 1)
-  const handleBadClicks = () => setBad(bad + 1)
-  
+
+  const totalClicks = good + bad + neutral
+  const average = ((good * 1) + (neutral * 0) + (bad * -1)) / totalClicks
+  const positive = ((good * 100) / totalClicks) + "%"
+
+  const handleGoodClicks = () => {
+      setGood(good + 1)
+  }
+  const handleNeutralClicks = () => {
+    setNeutral(neutral + 1)
+  }
+  const handleBadClicks = () => {
+      setBad(bad + 1)
+  }
 
   return (
     <div>
@@ -32,6 +43,9 @@ const App = () => {
       <Result text="good" count={good} />
       <Result text="neutral" count={neutral} />
       <Result text="bad" count={bad} />
+      <Result text="all" count={totalClicks} />
+      <Result text="average" count={average} />
+      <Result text="positive" count={positive} />
     </div>
   )
 }
