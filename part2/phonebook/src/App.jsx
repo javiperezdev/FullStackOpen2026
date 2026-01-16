@@ -4,16 +4,20 @@ import Person from './components/Person'
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
-
+  
   const addName = (event) => {
     event.preventDefault();
     const nameObject = {
       id: String(persons.length + 1),
       name: newName
-    }
+  }
+      if (persons.some(p => p.name.toLowerCase() == newName.toLowerCase())) {
+        alert(`${newName} is already in the phonebook!`)
+        return;
+      }
 
-    setPersons(persons.concat(nameObject))
-    setNewName('')
+      setPersons(persons.concat(nameObject))
+      setNewName('')
   }
 
   const handleNameChange = (event) => {
@@ -39,4 +43,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
