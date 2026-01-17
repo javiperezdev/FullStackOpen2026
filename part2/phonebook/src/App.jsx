@@ -4,12 +4,14 @@ import Person from './components/Person'
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
   
-  const addName = (event) => {
+  const addPerson = (event) => {
     event.preventDefault();
     const nameObject = {
       id: String(persons.length + 1),
-      name: newName
+      name: newName,
+      number: newNumber
   }
       if (persons.some(p => p.name.toLowerCase() == newName.toLowerCase())) {
         alert(`${newName} is already in the phonebook!`)
@@ -24,12 +26,19 @@ const App = () => {
     setNewName(event.target.value);
   }
 
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value);
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addName}>
+      <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={handleNameChange}/>
+        </div>
+        <div>
+          number: <input value={newNumber} onChange={handleNumberChange} />
         </div>
         <div>
           <button type="submit">add</button>
