@@ -1,16 +1,29 @@
-# React + Vite
+# Phonebook Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+This project is a simple phonebook application created as part of the [Full Stack Open](https://fullstackopen.com/en/) course (Part 2). It allows users to manage a list of contacts.
 
-Currently, two official plugins are available:
+## Appearance
+![image](./assets/img1.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## Features
+Current features of the application:
+* Adding a Person/Contact to an array and showing it in the page
+* Filtering of Persons/Contact to show only the ones that contain the information typed in the filter input
+* If a duplicate name is entered, an alert will pop up and that Person/Contact cannot be saved
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technologies Used
+![React](https://img.shields.io/badge/REACT-20232A?style=flat-square&logo=react&logoColor=61DAFB%22)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JAVASCRIPT-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 
-## Expanding the ESLint configuration
+## How to Run the Application
+In the project directory, you can run:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### `npm install`
+Installs the necessary dependencies.
+
+### `npm run dev`
+Runs the app in the development mode.
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
