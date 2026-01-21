@@ -4,6 +4,8 @@ import Filter from './components/Filter'
 import PersonsForm from './components/PersonsForm'
 import axios from 'axios'
 
+
+
 const App = () => {
 
   const [persons, setPersons] = useState([]) 
@@ -33,9 +35,14 @@ const App = () => {
         alert(`${newName} is already in the phonebook!`)
         return;
       }
-
-      setPersons(persons.concat(nameObject))
-      setNewName('')
+      
+      axios
+      .post('http://localhost:3001/persons', nameObject)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+        setNewName('')
+        setNewNumber('')
+      })
   }
 
   const personsToShow = persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
