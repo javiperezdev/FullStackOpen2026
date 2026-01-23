@@ -20,15 +20,23 @@ const App = () => {
     .then(initialPersons => {setPersons(initialPersons)})
   }, []) 
   
-  const addPerson = (event) => {
-    event.preventDefault();
-    const personObj = {
-      name: newName,
-      number: newNumber
-  }
-      if (persons.some(p => p.name.toLowerCase() == newName.toLowerCase())) {
-        alert(`${newName} is already in the phonebook!`)
-        return;
+    const addPerson = (event) => {
+      event.preventDefault();
+      const personObj = {
+        name: newName,
+        number: newNumber
+    }
+    const existingPerson = persons.find(p => p.name.toLowerCase() === newName.toLowerCase())
+  
+    if (existingPerson) {
+      if (window.confirm(`${newName} is already in the phonebook, do you want to update the number?`)) {
+          personServices
+          .update(existingPerson.id, personObj)
+          .then(response => setPersons(persons.map(person => person.id === existingPerson.id ? response : person)))
+          return;
+        }
+          alert(`${newName} number won't be modified`) 
+          return;
       }
 
       personServices
