@@ -33,6 +33,8 @@ const App = () => {
           personServices
           .update(existingPerson.id, personObj)
           .then(response => setPersons(persons.map(person => person.id === existingPerson.id ? response : person)))
+          setNewName('')
+          setNewNumber('')
           return;
         }
           alert(`${newName} number won't be modified`) 

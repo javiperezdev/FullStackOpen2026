@@ -11,7 +11,8 @@ This project is a simple phonebook application created as part of the [Full Stac
 Current features of the application:
 * Adding a Person/Contact to an array and showing it in the page
 * Filtering of Persons/Contact to show only the ones that contain the information typed in the filter input
-* If a duplicate name is entered, an alert will pop up and that Person/Contact cannot be saved
+* If an existing name is entered, the user will have the choice of change his/her number
+* Delete a Person/Contact, with confirmation
 
 ## Technologies Used
 ![React](https://img.shields.io/badge/REACT-20232A?style=flat-square&logo=react&logoColor=61DAFB%22)
