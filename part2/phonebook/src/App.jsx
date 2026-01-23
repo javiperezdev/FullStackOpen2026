@@ -15,7 +15,6 @@ const App = () => {
   const [newFilter, setNewFilter] = useState('')
 
   useEffect(() => {
-
     personServices
     .getAll()
     .then(initialPersons => {setPersons(initialPersons)})
@@ -24,7 +23,6 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault();
     const personObj = {
-      id: String(persons.length + 1),
       name: newName,
       number: newNumber
   }
@@ -42,6 +40,12 @@ const App = () => {
       })
   }
 
+  const executeDeletePerson = (id) => {
+    personServices
+    .deletePerson(id)
+    .then(() => setPersons(persons.filter(persona => persona.id != id)))
+  }
+
   const personsToShow = persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
 
   const handleNameChange = (event) => {
@@ -56,6 +60,15 @@ const App = () => {
     setNewFilter(event.target.value);
   }
 
+  const handleDelete = (id, name) => {
+    if(window.confirm(`Are you sure to delete ${name} from the phonebook?`)) {
+      executeDeletePerson(id)
+    }
+    else {
+      alert(`${name} won't be deleted!`)
+    }
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -65,7 +78,7 @@ const App = () => {
         <PersonsForm addPerson={addPerson} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} newName={newName} newNumber={newNumber}/>
       <h2>Numbers</h2>
       <div>
-        <Persons personsToShow={personsToShow}/>
+        <Persons personsToShow={personsToShow} handleDelete={handleDelete}/>
       </div>
     </div>
   )
