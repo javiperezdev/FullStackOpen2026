@@ -53,7 +53,7 @@ const App = () => {
       setTimeout(() => {          
         setMessage(null) 
         setMessageType('')       
-          }, 3000)
+          }, 5000)
       return
     }
 
@@ -70,14 +70,23 @@ const App = () => {
         setTimeout(() => {          
           setMessage(null) 
           setMessageType('')       
-          }, 3000)
+          }, 5000)
       })
   }
 
-  const executeDeletePerson = (id) => {
+  const executeDeletePerson = (id, name) => {
     personServices
     .deletePerson(id)
     .then(() => setPersons(persons.filter(person => person.id != id)))
+    .catch(() => {
+      setMessage(`Information of ${name} has been already removed!`)
+      setMessageType('error')
+
+      setTimeout(() => {          
+        setMessage(null) 
+        setMessageType('')       
+        }, 5000)
+    })
   }
 
   const personsToShow = persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
@@ -96,7 +105,7 @@ const App = () => {
 
   const handleDelete = (id, name) => {
     if(window.confirm(`Are you sure to delete ${name} from the phonebook?`)) {
-      executeDeletePerson(id)
+      executeDeletePerson(id, name)
       setMessageType('success')
       setMessage(`${name} was successfully deleted!`)
     }
@@ -107,7 +116,7 @@ const App = () => {
     setTimeout(() => {          
       setMessage(null) 
       setMessageType('')       
-        }, 3000)
+        }, 5000)
   }
 
 
