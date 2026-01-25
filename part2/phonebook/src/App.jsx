@@ -3,16 +3,20 @@ import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonsForm from './components/PersonsForm'
 import personServices from './services/personServices'
+import Notification from './components/Notification'
+import './index.css'
 
 
 
 const App = () => {
 
   const [persons, setPersons] = useState([]) 
-
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [message, setMessage] = useState(null)
+  const [messageType, setMessageType] = useState('')
+
 
   useEffect(() => {
     personServices
@@ -33,13 +37,25 @@ const App = () => {
           personServices
           .update(existingPerson.id, personObj)
           .then(response => setPersons(persons.map(person => person.id === existingPerson.id ? response : person)))
-          setNewName('')
-          setNewNumber('')
-          return;
-        }
-          alert(`${newName} number won't be modified`) 
-          return;
+          
+          setMessageType('success')
+          setMessage(`${newName} succefully modified!`) 
       }
+
+      else {
+      setMessageType('error')
+      setMessage(`${newName} number won't be modified`) 
+
+      }
+
+      setNewName('')
+      setNewNumber('')
+      setTimeout(() => {          
+        setMessage(null) 
+        setMessageType('')       
+          }, 3000)
+      return
+    }
 
       personServices
       .create(personObj)
@@ -47,13 +63,21 @@ const App = () => {
         setPersons(persons.concat(newPerson))
         setNewName('')
         setNewNumber('')
+
+        setMessageType('success')
+        setMessage(`added ${newName}!`)
+
+        setTimeout(() => {          
+          setMessage(null) 
+          setMessageType('')       
+          }, 3000)
       })
   }
 
   const executeDeletePerson = (id) => {
     personServices
     .deletePerson(id)
-    .then(() => setPersons(persons.filter(persona => persona.id != id)))
+    .then(() => setPersons(persons.filter(person => person.id != id)))
   }
 
   const personsToShow = persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
@@ -73,15 +97,24 @@ const App = () => {
   const handleDelete = (id, name) => {
     if(window.confirm(`Are you sure to delete ${name} from the phonebook?`)) {
       executeDeletePerson(id)
+      setMessageType('success')
+      setMessage(`${name} was successfully deleted!`)
     }
     else {
-      alert(`${name} won't be deleted!`)
+      setMessageType('error')
+      setMessage(`${name} won't be deleted!`)
     }
+    setTimeout(() => {          
+      setMessage(null) 
+      setMessageType('')       
+        }, 3000)
   }
+
 
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification info={message} type={messageType} />      
       <div>      
         filter shown with <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
       </div>
