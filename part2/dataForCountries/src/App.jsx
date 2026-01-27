@@ -15,6 +15,26 @@ const App = () => {
     })
 }, [])
 
+  const handleShowCountry = (country) => {
+    setValue(country.name.common)
+  }
+
+  const showCountry = (country) => {
+    return (
+      <div>
+        <h1>{country.name.common}</h1>
+        <p>capital: {country.capital}</p>
+        <p>area: {country.area}</p>
+        <h2>Languages</h2>
+        <ul>
+          {Object.values(country.languages).map(language => 
+          <li key={language}>{language}</li>
+          )}
+        </ul>
+        <img src={country.flags.png} alt={country.flags.alt}/>
+      </div>
+    )}
+
   const renderResults = () => {
     if (filteredCountries.length > 10) {
       return <p>{"Too many matches, specify another filter"}</p>
@@ -22,26 +42,15 @@ const App = () => {
 
     else if (filteredCountries.length === 1) {
       const country = filteredCountries[0]
-
       return (
-          <div>
-            <h1>{country.name.common}</h1>
-            <p>capital: {country.capital}</p>
-            <p>capital: {country.area}</p>
-            <h2>Languages</h2>
-            <ul>
-            {Object.values(country.languages).map(language => 
-            <li key={language}>{language}</li>
-            )}
-            </ul>
-            <img src={country.flags.png} alt={country.flags.alt}/>
-          </div>
-        )}
+      showCountry(country)
+      )
+    }
 
     else {
     return (
     <div>
-      {filteredCountries.map(country => <li key={country.name.common}>{country.name.common}</li>)}
+      {filteredCountries.map(country => <li key={country.name.common}>{country.name.common}<button onClick={() => handleShowCountry(country)}>show</button></li>)}
     </div>
     )
     }
@@ -54,6 +63,7 @@ const App = () => {
     setValue(event.target.value)
   }
 
+  console.log(renderResults())
   return (
     <div>
       <form>
