@@ -1,0 +1,27 @@
+{
+  "name": "phonebook-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javiperezdev/FullStackOpen2026.git#main"
+  },
+  "author": "javiperezdev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javiperezdev/FullStackOpen2026/issues"
+  },
+  "homepage": "https://github.com/javiperezdev/FullStackOpen2026/tree/main#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
