@@ -3,7 +3,7 @@ const app = express()
 
 const now = new Date()
 
-const persons = [
+let persons = [
     { 
       "id": "1",
       "name": "Arto Hellas", 
@@ -40,6 +40,18 @@ app.get('/api/persons/:id', (request, response) => {
     response.json(person)
   }
 
+  else {
+    return response.status(404).end()
+  }
+})
+
+app.delete('/api/persons/:id', (request, response) => {
+  const id = request.params.id
+  const personExists = persons.find(person => person.id === id)
+  if (personExists) {
+    persons = persons.filter(person => person.id !== id)
+    return response.status(204).end()
+  }
   else {
     return response.status(404).end()
   }
