@@ -65,6 +65,21 @@ app.post('/api/persons', (request, response) => {
   const person = request.body
   person.id = id
 
+  if (!person.name) {
+    response.json({"error": 'You must enter a name'})
+    return
+  }
+
+  if (!person.number) {
+    response.json({"error": 'You must enter a number'})
+    return
+  }
+
+  if (persons.find((p) => p.name === person.name)) {
+    response.json({"error": `${person.name} is already in the phonebook`})
+    return
+  }
+
   persons.push(person)
   response.json(person)
 })
