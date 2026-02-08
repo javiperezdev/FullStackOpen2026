@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+app.use(express.json())
+
 const now = new Date()
 
 let persons = [
@@ -55,6 +57,16 @@ app.delete('/api/persons/:id', (request, response) => {
   else {
     return response.status(404).end()
   }
+})
+
+app.post('/api/persons', (request, response) => {
+  const id = Math.round(Math.random() * 100000)
+
+  const person = request.body
+  person.id = id
+
+  persons.push(person)
+  response.json(person)
 })
 
 const PORT = 3001
