@@ -1,0 +1,23 @@
+.error {
+    text-align: center;
+    border: solid red 5px;
+    padding: 10px;
+    border-style: solid;
+    font-size: 25px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    background-color: beige;
+    color: red;
+}
+
+.success {
+    text-align: center;
+    border: solid green 5px;
+    padding: 10px;
+    border-style: solid;
+    font-size: 25px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    background-color: beige;
+    color: green;
+}
